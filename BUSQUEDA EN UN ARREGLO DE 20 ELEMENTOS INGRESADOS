@@ -1,0 +1,46 @@
+#include <stdio.h>
+/*Implementar un programa donde el usuario ingrese un número a buscar en un arreglo ordenado de 20 números. Mostrar la posición si lo encuentra, o un mensaje si no está.*/
+int main() {
+	int arreglo[20];
+	int temporal,i,j,minIndex,inicio=0,fin=20,medio,buscado,encontrado=0;
+	printf("Ingrese 20 numeros enteros para el arreglo\n");
+	for(i=0;i<20;i++){
+		printf("Ingrese el elemento %d: ",i);
+		scanf("%d",&arreglo[i]);
+	}
+	for (i = 0; i < 20; i++) {
+		minIndex = i;
+		for (j = i + 1; j < 20; j++) {
+			if (arreglo[j] < arreglo[minIndex]) {
+				minIndex = j;
+			}
+		}
+		// Intercambiar mínimo con el primer elemento no ordenado
+		temporal = arreglo[i];
+		arreglo[i] = arreglo[minIndex];
+		arreglo[minIndex] = temporal;
+	}
+	printf("\nIngrese el elemento que desea buscar:\n");
+	scanf("%d",&buscado);
+	while(inicio<=fin){
+		medio=(inicio+fin)/2;
+		if(arreglo[medio]==buscado){
+			printf("Numero encontrado en la posicion %d",medio);
+			encontrado=1;
+			break;
+		}else if(buscado<arreglo[medio]){
+			fin=medio-1;
+		}else {
+			inicio=medio+1;
+		}
+	}
+	if(!encontrado){
+		printf("EL NUMERO NO ESTA EN EL ARREGLO.");
+	}
+	printf("\n Arreglo ordenado:\n");
+	for(i=0;i<20;i++){
+		printf("%d, ",arreglo[i]);
+	}
+	return 0;
+}
+
