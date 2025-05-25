@@ -1,0 +1,49 @@
+#include <stdio.h>
+/*El usuario ingresa 10 números y luego un número a buscar. El programa lo ordena y luego Usar búsqueda binaria para encontrarlo.*/
+int main() {
+	int arreglo[10];
+	int temporal,i,j,minIndex,inicio=0,fin=9,medio,buscado,encontrado=0;
+	printf("Ingrese 10 numeros enteros para el arreglo\n");
+	for(i=0;i<=9;i++){
+		printf("Ingrese el elemento %d: ",i);
+		scanf("%d",&arreglo[i]);
+	}
+	for (i = 0; i < 10; i++) {
+		minIndex = i;
+		for (j = i + 1; j < 10; j++) {
+			if (arreglo[j] < arreglo[minIndex]) {
+				minIndex = j;
+			}
+		}
+		// Intercambiar mínimo con el primer elemento no ordenado
+		temporal = arreglo[i];
+		arreglo[i] = arreglo[minIndex];
+		arreglo[minIndex] = temporal;
+	}
+	for(i=0;i<10;i++){
+		printf("%d ",arreglo[i]);
+	}
+	printf("\nIngrese el elemento que desea buscar\n");
+	scanf("%d",&buscado);
+	while(inicio<=fin){
+		medio=(inicio+fin)/2;
+		if(arreglo[medio]==buscado){
+			printf("Numero encontrado en la posicion %d",medio);
+			encontrado=1;
+			break;
+		}else if(buscado<arreglo[medio]){
+			fin=medio-1;
+		}else{
+			inicio=medio+1;
+		}
+	}
+	if(!encontrado){
+		printf("El numero no está en el arreglo");
+	}
+	printf("\n Arreglo ordenado:\n");
+	for(i=0;i<9;i++){
+		printf("%d, ",arreglo[i]);
+	}
+	return 0;
+}
+
