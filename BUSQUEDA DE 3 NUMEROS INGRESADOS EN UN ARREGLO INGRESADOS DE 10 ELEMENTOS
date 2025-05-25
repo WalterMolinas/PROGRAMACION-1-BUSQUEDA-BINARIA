@@ -1,0 +1,83 @@
+#include <stdio.h>
+/*El usuario ingresa 10 números ordenados y luego ingresa 3 números diferentes a buscar. El programa debe aplicar búsqueda binaria para cada uno y mostrar si se encuentran.*/
+int main() {
+	int arreglo[10];
+	int temporal,i,j,minIndex,inicio=0,fin=9,medio,buscado1,buscado2,buscado3,encontrado=0;
+	printf("Ingrese 10 numeros enteros para el arreglo\n");
+	for(i=0;i<10;i++){
+		printf("Ingrese el elemento %d: ",i);
+		scanf("%d",&arreglo[i]);
+	}
+	for (i = 0; i < 10; i++) {
+		minIndex = i;
+		for (j = i + 1; j < 10; j++) {
+			if (arreglo[j] < arreglo[minIndex]) {
+				minIndex = j;
+			}
+		}
+		// Intercambiar mínimo con el primer elemento no ordenado
+		temporal = arreglo[i];
+		arreglo[i] = arreglo[minIndex];
+		arreglo[minIndex] = temporal;
+	}
+	printf("\nIngrese los 3 numeros que desea buscar:\n");
+	scanf("%d",&buscado1);
+	scanf("%d",&buscado2);
+	scanf("%d",&buscado3);
+	printf("\n Arreglo ordenado:\n");
+	for(i=0;i<10;i++){
+		printf("%d ",arreglo[i]);
+	}
+	while(inicio<=fin){
+		medio=(inicio+fin)/2;
+		if(arreglo[medio]==buscado1){
+			printf("\nNumero %d encontrado en la posicion %d",buscado1,medio);
+			encontrado=1;
+			break;
+		}else if(buscado1<arreglo[medio]){
+			fin=medio-1;
+		}else {
+			inicio=medio+1;
+		}
+	}
+	if(!encontrado){
+		printf("\nEL elemento %d NO ESTA EN EL ARREGLO.",buscado1);
+	}
+	encontrado=0;
+	inicio=0;
+	fin=9;
+	while(inicio<=fin){
+		medio=(inicio+fin)/2;
+		if(arreglo[medio]==buscado2){
+			printf("\nNumero %d encontrado en la posicion %d",buscado2,medio);
+			encontrado=1;
+			break;
+		}else if(buscado2<arreglo[medio]){
+			fin=medio-1;
+		}else {
+			inicio=medio+1;
+		}
+	}
+	if(!encontrado){
+		printf("\nEL elemento %d NO ESTA EN EL ARREGLO.",buscado2);
+	}
+	encontrado=0;
+	inicio=0;
+	fin=9;
+	while(inicio<=fin){
+		medio=(inicio+fin)/2;
+		if(arreglo[medio]==buscado3){
+			printf("\nNumero %d encontrado en la posicion %d",buscado3,medio);
+			encontrado=1;
+			break;
+		}else if(buscado3<arreglo[medio]){
+			fin=medio-1;
+		}else {
+			inicio=medio+1;
+		}
+	}
+	if(!encontrado){
+		printf("\nEL elemento %d NO ESTA EN EL ARREGLO.",buscado3);
+	}
+	return 0;
+}
